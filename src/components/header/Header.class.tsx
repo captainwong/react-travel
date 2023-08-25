@@ -6,7 +6,8 @@ import { withRouter, RouteComponentProps } from "../../helpers/withRouter";
 import styles from './Header.module.css';
 import logo from '../../assets/logo.svg';
 import store from "../../redux/store";
-import { LanguageState } from "../../redux/languageReducer";
+import { LanguageState } from "../../redux/language/languageReducer";
+import { addLanguageActionCreator, changeLanguageActionCreator } from "../../redux/language/languageActions";
 import { withTranslation, WithTranslation } from "react-i18next";
 
 interface HeaderState extends LanguageState {
@@ -34,17 +35,9 @@ class HeaderComponent extends React.Component<RouteComponentProps & WithTranslat
 
   langMenuHandler: MenuProps['onClick'] = (e) => {
     if (e.key === 'new') {
-      const action = {
-        type: "new_language",
-        payload: {code: "new_lang", name:"克林贡语"},
-      };
-      store.dispatch(action);
+      store.dispatch(addLanguageActionCreator('Clingon', 'clingon'));
     } else {
-      const action = {
-        type: "change_language",
-        payload: e.key,
-      };
-      store.dispatch(action);
+      store.dispatch(changeLanguageActionCreator(e.key === 'zh' ? 'zh' : 'en'));
     }
   }
 
