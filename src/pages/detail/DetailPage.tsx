@@ -1,12 +1,14 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-interface MatchParams {
+type MatchParams = {
   touristRouteId: string;
+  other: string;
 }
 
-export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (props) => {
+export const DetailPage: React.FC = () => {
+  const params = useParams<MatchParams>();
   return (
-    <h1>DetailPage: {props.match.params.touristRouteId} </h1>
+    <h1>DetailPage: {params.touristRouteId} </h1>
   );
 };

@@ -11,7 +11,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <>
-        <Header></Header>
+        <Header />
         <div className={styles['page-content']}>
           <Row style={{ marginTop: 20 }}>
             <Col span={6}>
@@ -53,7 +53,7 @@ export class HomePage extends React.Component {
         </div>
       
         <BusinessPartner />
-        <Footer></Footer>
+        <Footer />
 
       </>
     );
