@@ -1,7 +1,8 @@
 import React from "react";
 import { Image, Typography } from "antd";
+import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 
-export interface ProductImageProps {
+export interface ProductImageProps extends RouteComponentProps {
   id: string | number;
   size: "large" | "small";
   src: string;
@@ -9,9 +10,9 @@ export interface ProductImageProps {
   title: string;
 }
 
-export const ProductImage: React.FC<ProductImageProps> = ({ id, size, src, price, title }) => {
+const ProductImageComponent: React.FC<ProductImageProps> = ({ id, size, src, price, title, history, location, match }) => {
   return (
-    <>
+    <Link to={`details/${id}`}>
       {size === 'large'
         ? (<Image src={src} height={285} width={490} alt="" />)
         : (<Image src={src} height={120} width={240} alt="" />)}
@@ -20,6 +21,8 @@ export const ProductImage: React.FC<ProductImageProps> = ({ id, size, src, price
         <Typography.Text type="secondary">{title.slice(0, 25)}</Typography.Text>
         <Typography.Text type="danger" strong>￥{price}起</Typography.Text>
       </div>
-    </>
+    </Link>
   );
 };
+
+export const ProductImage = withRouter(ProductImageComponent);
