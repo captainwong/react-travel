@@ -1,16 +1,58 @@
 import React from "react";
 import { Layout, Typography, Input, Dropdown, Menu, Button } from 'antd';
+import type { MenuProps } from "antd";
 import { GlobalOutlined } from '@ant-design/icons';
 import { withRouter, RouteComponentProps } from "../../helpers/withRouter";
 import styles from './Header.module.css';
 import logo from '../../assets/logo.svg';
+import store from "../../redux/store";
+import { LanguageState } from "../../redux/languageReducer";
 
-class HeaderComponent extends React.Component<RouteComponentProps> {
+interface HeaderState extends LanguageState {
+
+}
+
+class HeaderComponent extends React.Component<RouteComponentProps, HeaderState> {
+  constructor(props : RouteComponentProps) {
+    super(props);
+    const storeState = store.getState();
+    this.state = {
+      language: storeState.language,
+      languageList: storeState.languageList,
+    };
+    store.subscribe(this.langChangedHandler);
+  }
+
+  langChangedHandler = () => {
+    const storeState = store.getState();
+    this.setState({
+      language: storeState.language,
+      languageList: storeState.languageList,
+    });
+  }
+
+  langMenuHandler: MenuProps['onClick'] = (e) => {
+    if (e.key === 'new') {
+      const action = {
+        type: "new_language",
+        payload: {code: "new_lang", name:"克林贡语"},
+      };
+      store.dispatch(action);
+    } else {
+      const action = {
+        type: "change_language",
+        payload: e.key,
+      };
+      store.dispatch(action);
+    }
+  }
+
   render() {
-    const items = [
-      { key: "1", label: "中文" },
-      { key: "2", label: 'English' },
+    const langItems = [
+      ...this.state.languageList.map((lang) => { return { label: lang.name, key: lang.code, } }),
+      { label: '添加新语言', key: 'new' },
     ];
+    const langMenuProps = { items: langItems, onClick: this.langMenuHandler };
 
     const mainMenuItems = [
       { key: "1", label: "旅游首页" },
@@ -42,10 +84,10 @@ class HeaderComponent extends React.Component<RouteComponentProps> {
             <Typography.Text>Make travel happier</Typography.Text>
             <Dropdown.Button className={styles['lang-menu']}
               style={{ marginLeft: 15 }}
-              menu={{ items }}
+              menu={langMenuProps}
               icon={<GlobalOutlined />}
             >
-              Language
+              {this.state.language === 'zh' ? '中文' : 'English'}
             </Dropdown.Button>
             <Button.Group className={styles['button-group']}>
               <Button onClick={() => navigate('/signup')}>Sign Up</Button>
