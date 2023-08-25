@@ -21,7 +21,7 @@ export const BusinessPartner: React.FC = () => {
           companies.map((i) => {
             return (
               <Col span={6}>
-                <img src={i} className={styles.img} />
+                <img src={i} className={styles.img} alt='business-partner'/>
               </Col>
             );
           })

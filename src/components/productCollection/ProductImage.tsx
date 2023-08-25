@@ -12,9 +12,9 @@ export interface ProductImageProps {
 export const ProductImage: React.FC<ProductImageProps> = ({ id, size, src, price, title }) => {
   return (
     <>
-      {size == 'large'
-        ? (<Image src={src} height={285} width={490} />)
-        : (<Image src={src} height={120} width={240} />)}
+      {size === 'large'
+        ? (<Image src={src} height={285} width={490} alt="" />)
+        : (<Image src={src} height={120} width={240} alt="" />)}
       
       <div>
         <Typography.Text type="secondary">{title.slice(0, 25)}</Typography.Text>
