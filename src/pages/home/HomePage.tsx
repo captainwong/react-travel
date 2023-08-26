@@ -6,16 +6,12 @@ import sideImage1 from '../../assets/images/sider_2019_12-09.png';
 import sideImage2 from '../../assets/images/sider_2019_02-04.png';
 import sideImage3 from '../../assets/images/sider_2019_02-04-2.png';
 import { withTranslation, WithTranslation } from "react-i18next";
-import axios from 'axios';
 import {
-  RecommendProductsActionTypes,
-  fetchRecommendProductsActionStartCreator,
-  fetchRecommendProductsSuccessActionCreator,
-  fetchRecommendProductsFailActionCreator,
+  fetchRecommendProductsActionCreator,
 } from "../../redux/recommendProducts/recommendProductsActions";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
-import { Dispatch } from "redux";
+//import { Dispatch } from "redux";
 
 
 
@@ -27,17 +23,11 @@ const mapStateToProps = (state: RootState) => {
   };
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    fetchStart: () => {
-      dispatch(fetchRecommendProductsActionStartCreator());
+    fetchRecommendProducts: () => {
+      dispatch(fetchRecommendProductsActionCreator());
     },
-    fetchSuccess: (data: any) => {
-      dispatch(fetchRecommendProductsSuccessActionCreator(data));
-    },
-    fetchFail: (error: any) => {
-      dispatch(fetchRecommendProductsFailActionCreator(error));
-    }
   }
 }
 
@@ -47,18 +37,8 @@ type PropsType = WithTranslation
   ;
 
 class HomePageComponent extends React.Component<PropsType> {
-  async componentDidMount() {
-    this.props.fetchStart();
-    try {
-      const { data } = await axios.get('http://192.168.50.162:3001/api/productCollections');
-      console.log(data);
-      this.props.fetchSuccess(data);
-    } catch (e) {
-      console.log(e);
-      if (e instanceof Error) {
-        this.props.fetchFail(e.message);
-      }
-    }
+  componentDidMount() {
+    this.props.fetchRecommendProducts();
   }
 
   render() {
