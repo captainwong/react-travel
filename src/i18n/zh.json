@@ -20,7 +20,8 @@
         "enterprise":"企业游",
         "high_end":"高端游",
         "outdoor":"爱玩户外",
-        "insurance":"保险"
+        "insurance":"保险",
+        "search_placeholder":"请输入目的地、主题或关键字"
     },
     "footer": {
         "detail" : "版权所有 @ React 旅游网"

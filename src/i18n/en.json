@@ -20,7 +20,8 @@
         "enterprise":"Enterprise",
         "high_end":"High-end",
         "outdoor":"Outdoor",
-        "insurance":"Insurance"
+        "insurance":"Insurance",
+        "search_placeholder":"Please input destination, theme or keyword"
     },
     "footer": {
         "detail" : "All rights reserved @ ReactTravel.com"

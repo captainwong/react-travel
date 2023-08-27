@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
           <Typography.Title level={3} className={styles['title']}>{t("header.title")}</Typography.Title>
         </span>
 
-        <Input.Search placeholder='Please input destination, theme or keyword' className={styles['search-input']}></Input.Search>
+        <Input.Search placeholder={t("header.search_placeholder")} className={styles['search-input']}></Input.Search>
       </Layout.Header>
 
       <Menu mode={"horizontal"} className={styles['main-menu']} items={mainMenuItems}></Menu>
