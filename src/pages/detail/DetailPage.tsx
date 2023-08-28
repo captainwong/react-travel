@@ -25,7 +25,7 @@ export const DetailPage: React.FC = () => {
     if (touristRouteId) {
       dispatch(getProductDetail(touristRouteId));
     }
-  });
+  }, [touristRouteId, dispatch]);
 
   if (loading) {
     return (
