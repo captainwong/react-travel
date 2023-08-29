@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Typography, Spin } from 'antd';
 import styles from './HomePage.module.css';
-import { Header, Footer, SideMenu, Carousel, ProductCollection, BusinessPartner } from '../../components';
+import { SideMenu, Carousel, ProductCollection, BusinessPartner } from '../../components';
 import sideImage1 from '../../assets/images/sider_2019_12-09.png';
 import sideImage2 from '../../assets/images/sider_2019_02-04.png';
 import sideImage3 from '../../assets/images/sider_2019_02-04-2.png';
@@ -12,7 +12,7 @@ import {
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
 //import { Dispatch } from "redux";
-
+import { MainLayout } from "../../layouts";
 
 
 const mapStateToProps = (state: RootState) => {
@@ -65,8 +65,7 @@ class HomePageComponent extends React.Component<PropsType> {
 
     return (
       <>
-        <Header />
-        <div className={styles['page-content']}>
+        <MainLayout>
           <Row style={{ marginTop: 20 }}>
             <Col span={6}>
               {/* <div style={{ background: "red" }}>multi-menu</div> */}
@@ -104,10 +103,9 @@ class HomePageComponent extends React.Component<PropsType> {
             products={producList[2].touristRoutes}
           />
 
-        </div>
-      
-        <BusinessPartner />
-        <Footer />
+
+          <BusinessPartner />
+        </MainLayout>
 
       </>
     );

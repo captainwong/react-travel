@@ -2,6 +2,7 @@ import { ThunkAction } from "redux-thunk";
 import { RootState } from "../store";
 import axios from "axios";
 import { Dispatch } from "redux";
+import { API_HOST } from '../api';
 
 export const FETCH_RECOMMEND_PRODUCTS_START = "FETCH_RECOMMEND_PRODUCTS_START";
 export const FETCH_RECOMMEND_PRODUCTS_SUCCESS = "FETCH_RECOMMEND_PRODUCTS_SUCCESS";
@@ -56,8 +57,7 @@ export const fetchRecommendProductsActionCreator =
       dispatch(fetchRecommendProductsStartActionCreator());
       try {
         const { data } = await axios.get(
-          //'http://192.168.50.162:3001/api/productCollections'
-          'http://123.56.149.216:8080/api/productCollections'
+          `${API_HOST}/api/productCollections`
         );
         console.log(data);
         dispatch(fetchRecommendProductsSuccessActionCreator(data));

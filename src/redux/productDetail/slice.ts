@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_HOST } from '../api';
 
 interface ProductDetailState{
   loading: boolean;
@@ -16,7 +17,7 @@ const initialState: ProductDetailState = {
 export const getProductDetail = createAsyncThunk(
   "productDetail/getProductDetail",
   async (touristRouteId: string, thunkAPI) => {
-    const { data } = await axios.get(`http://123.56.149.216:8080/api/touristRoutes/${touristRouteId}`);
+    const { data } = await axios.get(`${API_HOST}/api/touristRoutes/${touristRouteId}`);
     return data;
   }
 )

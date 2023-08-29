@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useParams, } from "react-router-dom";
 import { Spin, Row, Col, Typography, DatePicker, Divider, Anchor, Menu } from "antd";
 import styles from './DetailPage.module.css';
-import { Header, Footer, ProductIntro, ProductComments } from "../../components";
+import { ProductIntro, ProductComments } from "../../components";
 import { commentMockData } from './mockup';
 import { getProductDetail } from "../../redux/productDetail/slice";
 import { useSelector, useAppDispatch } from "../../redux/hooks";
 // import { useDispatch } from "react-redux";
+import { MainLayout } from "../../layouts";
 
 const { RangePicker } = DatePicker;
 
@@ -48,8 +49,7 @@ export const DetailPage: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <div className={styles.content}>
+      <MainLayout>
         {/* 产品简介与日期选择 */}
         <div className={styles['product-intro-container']}>
           <Row>
@@ -102,7 +102,7 @@ export const DetailPage: React.FC = () => {
           <div dangerouslySetInnerHTML={{ __html: product.fees }} style={{ margin: 50 }} ></div>
         </div>
         {/* 预定须知 */}
-        <div id='notes' className={styles['product-detail-container']}>          
+        <div id='notes' className={styles['product-detail-container']}>
           <Divider orientation="center">
             <Typography.Title level={3}>预定须知</Typography.Title>
           </Divider>
@@ -117,8 +117,7 @@ export const DetailPage: React.FC = () => {
             <ProductComments data={commentMockData} />
           </div>
         </div>
-      </div>
-      <Footer />
+      </MainLayout>
     </>
   );
 };

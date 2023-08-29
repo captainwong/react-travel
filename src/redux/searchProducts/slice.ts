@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_HOST } from '../api';
 
 interface SearchProductState {
   loading: boolean;
@@ -22,8 +23,7 @@ export const searchProducts = createAsyncThunk(
     nextPage: string | number,
     pageSize: string | number,
   }, thunkAPI) => {
-    //let url = `http://123.56.149.216:8080/api/touristRoutes?pageNumber=${params.nextPage}&pageSize=${params.pageSize}`;
-    let url = `http://127.0.0.1:3001/api/touristRoutes?pageNumber=${params.nextPage}&pageSize=${params.pageSize}`;
+    let url = `${API_HOST}/api/touristRoutes?pageNumber=${params.nextPage}&pageSize=${params.pageSize}`;
     if (params.keywords) {
       url += `&keyword=${params.keywords}`;
     }
