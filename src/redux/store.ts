@@ -3,11 +3,13 @@ import { productDetailSlice } from './productDetail/slice';
 import { languageReducer } from './language/languageReducer';
 import { recommendProductsReducer } from './recommendProducts/recommendProductsReducer';
 import { actionLog } from './middlewares/actionLog';
+import { searchProductsSlice } from './searchProducts/slice';
 
 const rootReducer = combineReducers({
   language: languageReducer,
   recommendProducts: recommendProductsReducer,
   productDetail: productDetailSlice.reducer,
+  searchProducts: searchProductsSlice.reducer,
 });
 
 const store = configureStore({
