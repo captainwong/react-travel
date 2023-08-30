@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SignInForm.module.css";
-import { Button, Checkbox, Form, Input } from 'antd';
-import { signIn } from "../../redux/user/slice";
+import { Button, Checkbox, Form, Input, Modal } from 'antd';
+import { signIn, userSlice } from "../../redux/user/slice";
 import { useSelector, useAppDispatch } from "../../redux/hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,10 +15,21 @@ export const SignInForm: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (jwt !== null) {
+    if (loading) {
+      return;
+    }
+    
+    if (error) {
+      console.log('SignInForm.19', error);
+      Modal.error({
+        title: 'Error',
+        content: error,
+      });
+      dispatch(userSlice.actions.clearError());
+    } else if (jwt !== null) {
       navigate('/');
     }
-  }, [jwt]);
+  }, [jwt, error, loading]);
 
   const onFinish = (values: any) => {
     console.log('Success:', values);

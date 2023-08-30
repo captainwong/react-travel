@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import './index.css';
 import './i18n/config';
-import store from './redux/store';
+import store, { persistedStore } from './redux/store';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Spin } from 'antd';
 import axios from 'axios';
 
 axios.defaults.headers["x-icode"] = 'D4D928FF7C10128D';
@@ -25,7 +27,9 @@ while in production componentDidMount is called only once even with <React.Stric
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={<Spin />} persistor={persistedStore}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
