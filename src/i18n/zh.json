@@ -21,7 +21,10 @@
         "high_end":"高端游",
         "outdoor":"爱玩户外",
         "insurance":"保险",
-        "search_placeholder":"请输入目的地、主题或关键字"
+        "search_placeholder":"请输入目的地、主题或关键字",
+        "shopping_cart": "购物车",
+        "sign_out": "注销",
+        "welcome":"欢迎回来 "
     },
     "footer": {
         "detail" : "版权所有 @ React 旅游网"

@@ -21,7 +21,10 @@
         "high_end":"High-end",
         "outdoor":"Outdoor",
         "insurance":"Insurance",
-        "search_placeholder":"Please input destination, theme or keyword"
+        "search_placeholder":"Please input destination, theme or keyword",
+        "shopping_cart": "Shopping Cart",
+        "sign_out": "Sign Out",
+        "welcome":"Welcome back "
     },
     "footer": {
         "detail" : "All rights reserved @ ReactTravel.com"

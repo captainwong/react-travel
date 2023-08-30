@@ -26,6 +26,10 @@
   margin-top: 5px;
 }
 
+.email {
+  margin-right: 10px;
+}
+
 .main-header {
   background-color: white !important;
   height: 60px;

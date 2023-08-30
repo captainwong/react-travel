@@ -1,27 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Typography, Input, Dropdown, Menu, Button } from 'antd';
 import type { MenuProps } from "antd";
 import { GlobalOutlined } from '@ant-design/icons';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 import {
-  LanguageActionTypes,
   addLanguageActionCreator,
   changeLanguageActionCreator
 } from "../../redux/language/languageActions";
-import { useSelector } from "../../redux/hooks";
-
+import { useSelector, useAppDispatch } from "../../redux/hooks";
 import styles from './Header.module.css';
 import logo from '../../assets/logo.svg';
+import jwtDecode, { JwtPayload as BaseJwtPayload } from "jwt-decode";
+import { userSlice } from "../../redux/user/slice";
+
+interface JwtPayload extends BaseJwtPayload {
+  email: string;
+}
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
   const language = useSelector((state) => state.language.language);
   const languageList = useSelector((state) => state.language.languageList);
-  const dispatch = useDispatch<Dispatch<LanguageActionTypes>>();
+  const jwt = useSelector(s => s.user.token);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (jwt) {
+      const token = jwtDecode<JwtPayload>(jwt);
+      setEmail(token.email);
+    }
+  }, [jwt]);
+
+  const onSignOut = () => {
+    dispatch(userSlice.actions.signOut());
+    navigate('/');
+  }
 
   const langMenuHandler: MenuProps['onClick'] = (e) => {
     if (e.key === 'new') {
@@ -71,10 +87,25 @@ export const Header: React.FC = () => {
           >
             {language === 'zh' ? '中文' : 'English'}
           </Dropdown.Button>
-          <Button.Group className={styles['button-group']}>
-            <Button onClick={() => navigate('/signup')}>{t("header.register")}</Button>
-            <Button onClick={() => navigate('/signin')}>{t("header.signin")}</Button>
-          </Button.Group>
+
+          {
+            jwt ? (
+              <Button.Group className={styles['button-group']}>
+                <span className={styles.email}>
+                  {t("header.welcome")}
+                  <Typography.Text strong>{email}</Typography.Text>
+                </span>
+                <Button >{t("header.shopping_cart")}</Button>
+                <Button onClick={onSignOut}>{t("header.sign_out")}</Button>
+              </Button.Group>
+            ) : (
+              <Button.Group className={styles['button-group']}>
+                <Button onClick={() => navigate('/signup')}>{t("header.register")}</Button>
+                <Button onClick={() => navigate('/signin')}>{t("header.signin")}</Button>
+              </Button.Group>
+            )
+          }
+
         </div>
       </div>
 
