@@ -1,7 +1,11 @@
 import React from "react";
+import { UserLayout } from "../../layouts";
 
 export const SignInPage: React.FC = () => {
   return (
-    <h1>Sign In</h1>
+    <UserLayout>
+      <h1>Sign In</h1>
+    </UserLayout>
+    
   );
 };
