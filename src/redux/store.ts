@@ -4,12 +4,14 @@ import { languageReducer } from './language/languageReducer';
 import { recommendProductsReducer } from './recommendProducts/recommendProductsReducer';
 import { actionLog } from './middlewares/actionLog';
 import { searchProductsSlice } from './searchProducts/slice';
+import { userSlice } from './user/slice';
 
 const rootReducer = combineReducers({
   language: languageReducer,
   recommendProducts: recommendProductsReducer,
   productDetail: productDetailSlice.reducer,
   searchProducts: searchProductsSlice.reducer,
+  user: userSlice.reducer,
 });
 
 const store = configureStore({
