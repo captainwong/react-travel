@@ -4,7 +4,7 @@ import { MainLayout } from "../../layouts";
 import { Row, Col, Affix } from "antd";
 import { ProductList, PaymentCard } from "../../components";
 import { useSelector, useAppDispatch } from "../../redux/hooks";
-import { removeShoppingCartItems } from "../../redux/shoppingCart/slice";
+import { removeShoppingCartItems, checkOut } from "../../redux/shoppingCart/slice";
 
 export const ShoppingCartPage: React.FC = () => {
   const loading = useSelector(s => s.shoppingCart.loading);
@@ -32,10 +32,10 @@ export const ShoppingCartPage: React.FC = () => {
                   shoppingCartItems.map(item => item.originalPrice).reduce((a, b) => { return a + b; }, 0)
                 }
                 price={
-                  shoppingCartItems.map(item => item.price * (item.discountPresent ? item.discountPresent : 1)).reduce((a, b) => { return a + b; }, 0)
+                  shoppingCartItems.map(item => item.price * (item.discountPersent ? item.discountPersent : 1)).reduce((a, b) => { return a + b; }, 0)
                 }
                 onCheckout={() => {
-                  
+                  dispatch(checkOut(jwt));
                 }}
                 onShppingCartClear={() => {
                   dispatch(removeShoppingCartItems({token: jwt, ids: shoppingCartItems.map(item=>item.id)}));

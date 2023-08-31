@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './App.module.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage, SignInPage, SignUpPage, DetailPage, SearchPage, ShoppingCartPage } from './pages';
+import { HomePage, SignInPage, SignUpPage, DetailPage, SearchPage, ShoppingCartPage, PlaceOrderPage } from './pages';
 import { Navigate } from 'react-router-dom';
 import { useSelector, useAppDispatch } from './redux/hooks';
 import { getShoppingCart } from './redux/shoppingCart/slice';
@@ -43,10 +43,17 @@ function App() {
           <Route path='/search/' element={<SearchPage />} >
             <Route path=':keywords' element={<SearchPage />} />
           </Route>
-          <Route path='shoppingCart'
+          <Route path='/shoppingCart'
             element={ 
               <PrivateRoute>
                 <ShoppingCartPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path='/placeOrder'
+            element={ 
+              <PrivateRoute>
+                <PlaceOrderPage />
               </PrivateRoute>
             }
           />

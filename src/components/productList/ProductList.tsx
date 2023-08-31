@@ -9,7 +9,7 @@ const { Text } = Typography;
 interface Product {
   departureCity: string;
   description: string;
-  discountPresent: number;
+  discountPersent: number;
   id: string;
   originalPrice: number;
   price: number;
@@ -35,14 +35,14 @@ const listData = (productList: Product[]) =>
       <>
         {p.departureCity && <Tag color="#f50">{p.departureCity}出发</Tag>}
         {p.travelDays && <Tag color="#108ee9">{p.travelDays}天</Tag>}
-        {p.discountPresent && <Tag color="#87d068">{p.discountPresent}超低折扣</Tag>}
+        {p.discountPersent && <Tag color="#87d068">{p.discountPersent}超低折扣</Tag>}
         {p.tripType && <Tag color="#2db7f5">{p.tripType}</Tag>}
       </>
     ),
     imgSrc: p.touristRoutePictures[0].url,
     price: p.price,
     originalPrice: p.originalPrice,
-    discountPresent: p.discountPresent,
+    discountPersent: p.discountPersent,
     rating: p.rating,
   }));
 
@@ -105,7 +105,7 @@ export const ProductList: React.FC<PropsType> = ({ data, paging, onPageChange })
             title={
               <>
                 {
-                  item.discountPresent
+                  item.discountPersent
                     ? (
                       <>
                         <Text style={{ fontSize: 20, fontWeight: 400 }} delete >

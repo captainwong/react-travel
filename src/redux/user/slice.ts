@@ -17,7 +17,7 @@ const initialState: UserState = {
 export const signIn = createAsyncThunk(
   "user/signIn",
   async (params: { email: string, password: string }, thunkAPI) => {
-      const { data } = await axios.post(`${API_HOST}/auth/signin/`, {
+      const { data } = await axios.post(`${API_HOST}/auth/login/`, {
         email: params.email,
         password: params.password,
       });
