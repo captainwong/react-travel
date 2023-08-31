@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Typography, Input, Dropdown, Menu, Button } from 'antd';
+import { Layout, Typography, Input, Dropdown, Menu, Button, Spin } from 'antd';
 import type { MenuProps } from "antd";
 import { GlobalOutlined } from '@ant-design/icons';
 import { useTranslation } from "react-i18next";
@@ -22,6 +22,8 @@ export const Header: React.FC = () => {
   const navigate = useNavigate();
   const language = useSelector((state) => state.language.language);
   const languageList = useSelector((state) => state.language.languageList);
+  const shoppingCartLoading = useSelector(s => s.shoppingCart.loading);
+  const shoppingCartItems = useSelector(s => s.shoppingCart.items);
   const jwt = useSelector(s => s.user.token);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -95,7 +97,9 @@ export const Header: React.FC = () => {
                   {t("header.welcome")}
                   <Typography.Text strong>{email}</Typography.Text>
                 </span>
-                <Button onClick={() => { navigate('/shoppingCart') }}>{t("header.shopping_cart")}</Button>
+                <Button onClick={() => { navigate('/shoppingCart') }} >
+                  {t("header.shopping_cart")} { '(' } { shoppingCartLoading ? (<Spin />) : ( shoppingCartItems.length)} {')'} 
+                </Button>
                 <Button onClick={onSignOut}>{t("header.sign_out")}</Button>
               </Button.Group>
             ) : (
@@ -111,7 +115,7 @@ export const Header: React.FC = () => {
 
       {/* header */}
       <Layout.Header className={styles['main-header']}>
-        <span onClick={() => navigate('/')} >
+        <span className={styles['logo-and-title']} onClick={() => navigate('/')} >
           <img src={logo} alt="logo" className={styles['App-logo']} />
           <Typography.Title level={3} className={styles['title']}>{t("header.title")}</Typography.Title>
         </span>

@@ -5,6 +5,7 @@ import { recommendProductsReducer } from './recommendProducts/recommendProductsR
 import { actionLog } from './middlewares/actionLog';
 import { searchProductsSlice } from './searchProducts/slice';
 import { userSlice } from './user/slice';
+import { shoppingCartSlice } from './shoppingCart/slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -23,8 +24,8 @@ const rootPersistConfig = {
 const userPersistConfig = {
   key: "user",
   storage: storage,
-  blacklist: [
-    'loading', 'error',
+  whitelist: [
+    'token', 
   ]
 }
 
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   productDetail: productDetailSlice.reducer,
   searchProducts: searchProductsSlice.reducer,
   user: persistReducer(userPersistConfig, userSlice.reducer),
+  shoppingCart: shoppingCartSlice.reducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

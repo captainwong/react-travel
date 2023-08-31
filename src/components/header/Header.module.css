@@ -79,3 +79,7 @@
   background-color: #1976D2 !important;
   color: #f5f5f5 !important;
 }
+
+.logo-and-title {
+  cursor: pointer;
+}

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './App.module.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage, SignInPage, SignUpPage, DetailPage, SearchPage, ShoppingCartPage } from './pages';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from './redux/hooks';
+import { useSelector, useAppDispatch } from './redux/hooks';
+import { getShoppingCart } from './redux/shoppingCart/slice';
+
 
 interface PropsType {
   children: React.ReactNode;
@@ -21,6 +23,15 @@ const PrivateRoute: React.FC<PropsType> = ({ children }) => {
 }
 
 function App() {
+  const jwt = useSelector(s => s.user.token);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getShoppingCart(jwt));
+    }
+  }, [jwt]);
+
   return (
     <div className={styles.App}>
       <BrowserRouter>
