@@ -11,7 +11,7 @@ const { Title, Text } = Typography;
 interface OrderItem {
   key: number;
   item: string;
-  amount: string | number | JSX.Element;
+  price: string | number | JSX.Element;
 }
 
 const columns: ColumnsType<OrderItem> = [
@@ -40,11 +40,11 @@ export const CheckoutCard: React.FC<PropsType> = (props) => {
     ? props.order.orderItems.map((i: any, index: any) => ({
       key: index,
       item: i.touristRoute.title,
-      amount: (
+      price: (
         <>
-          <Text delete>￥{i.originalPrice}</Text> {" "}
+          <Text delete>￥{i.touristRoute.originalPrice}</Text> {" "}
           <Text type="danger" strong>
-            ￥{i.originalPrice * i.discountPersent}
+            ￥{i.touristRoute.originalPrice * i.touristRoute.discountPersent}
           </Text>
         </>
       )

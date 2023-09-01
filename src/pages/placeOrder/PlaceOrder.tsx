@@ -4,9 +4,14 @@ import { PaymentForm, CheckoutCard } from "../../components";
 import { MainLayout } from "../../layouts";
 import { Row, Col } from "antd";
 import { useSelector, useAppDispatch } from "../../redux/hooks";
+import { placeOrder } from "../../redux/order/slice";
 
+export const PlaceOrderPage: React.FC = () => {
+  const jwt = useSelector(s => s.user.token) as string;
+  const loading = useSelector(s => s.order.loading);
+  const order = useSelector(s => s.order.order);
+  const dispatch = useAppDispatch();
 
-export const PlaceOrderPage : React.FC = () => {
   return (
     <MainLayout>
       <Row>
@@ -14,7 +19,13 @@ export const PlaceOrderPage : React.FC = () => {
           <PaymentForm />
         </Col>
         <Col span={12}>
-          
+          <CheckoutCard
+            loading={loading}
+            order={order}
+            onCheckout={() => {
+              dispatch(placeOrder({ jwt, orderId: order.id }));
+            }}
+          />
         </Col>
       </Row>
     </MainLayout>

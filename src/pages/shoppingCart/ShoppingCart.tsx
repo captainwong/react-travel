@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ShoppingCart.module.css";
 import { MainLayout } from "../../layouts";
 import { Row, Col, Affix } from "antd";
@@ -14,13 +14,14 @@ export const ShoppingCartPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+
   return (
     <MainLayout>
       <Row>
         {/* 购物车 */}
         <Col span={16}>
           <div className={styles.container}>
-            <ProductList data={shoppingCartItems.map(item=>item.touristRoute)}/>
+            <ProductList data={shoppingCartItems.map(item => item.touristRoute)} />
           </div>
         </Col>
 
@@ -44,7 +45,7 @@ export const ShoppingCartPage: React.FC = () => {
                   navigate('/placeOrder');
                 }}
                 onShppingCartClear={() => {
-                  dispatch(removeShoppingCartItems({token: jwt, ids: shoppingCartItems.map(item=>item.id)}));
+                  dispatch(removeShoppingCartItems({ token: jwt, ids: shoppingCartItems.map(item => item.id) }));
                 }}
               />
             </div>

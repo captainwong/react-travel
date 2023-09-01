@@ -18,7 +18,7 @@ const initialState: OrderState = {
 export const placeOrder = createAsyncThunk(
   "order/placeOrder",
   async (params: { jwt: string, orderId: string }, thunkAPI) => {
-      const { data } = await axios.post(`${API_HOST}/orders/${params.orderId}/placeOrder`, null, {
+      const { data } = await axios.post(`${API_HOST}/api/orders/${params.orderId}/placeOrder`, null, {
         headers: {
           'Authorization': 'Bearer ' + params.jwt
         }
@@ -57,6 +57,7 @@ export const orderSlice = createSlice({
       state.order = null;
     },
     [placeOrder.fulfilled.type]: (state, action: PayloadAction<any>) => {
+      console.log('order slice got order from placeOrder', action.payload);
       state.order = action.payload;
       state.error = null;
       state.loading = false;  
