@@ -6,6 +6,7 @@ import { actionLog } from './middlewares/actionLog';
 import { searchProductsSlice } from './searchProducts/slice';
 import { userSlice } from './user/slice';
 import { shoppingCartSlice } from './shoppingCart/slice';
+import { orderSlice } from './order/slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   searchProducts: searchProductsSlice.reducer,
   user: persistReducer(userPersistConfig, userSlice.reducer),
   shoppingCart: shoppingCartSlice.reducer,
+  order: orderSlice.reducer,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

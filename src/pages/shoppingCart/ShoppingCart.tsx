@@ -4,7 +4,7 @@ import { MainLayout } from "../../layouts";
 import { Row, Col, Affix } from "antd";
 import { ProductList, PaymentCard } from "../../components";
 import { useSelector, useAppDispatch } from "../../redux/hooks";
-import { removeShoppingCartItems, checkOut } from "../../redux/shoppingCart/slice";
+import { removeShoppingCartItems, checkout } from "../../redux/shoppingCart/slice";
 import { useNavigate } from "react-router-dom";
 
 export const ShoppingCartPage: React.FC = () => {
@@ -40,7 +40,7 @@ export const ShoppingCartPage: React.FC = () => {
                   if (shoppingCartItems.length <= 0) {
                     return;
                   }
-                  dispatch(checkOut(jwt));
+                  dispatch(checkout(jwt));
                   navigate('/placeOrder');
                 }}
                 onShppingCartClear={() => {
